@@ -1,0 +1,14 @@
+{
+  "name": "angdroidular",
+  "version": "1.0.0",
+  "description": "group examination project",
+  "scripts": {
+    "start": "lite-server",
+	"postinstall":"bower install"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  }
+}
