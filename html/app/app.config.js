@@ -3,7 +3,13 @@ angular.module("app").config(["$routeProvider", "$locationProvider", function ($
         .when("/", {
             template: "<main></main>"
         })
-        .otherwise({template: "<error404></error404>"});
+        .when("/login", {
+            template: "<login></login>"
+        })
+        .when("/login/:msg", {
+            template: "<login></login>"
+        })
+        .otherwise({template: "<main></main>"});
     $locationProvider.html5Mode(true);
 }]);
 

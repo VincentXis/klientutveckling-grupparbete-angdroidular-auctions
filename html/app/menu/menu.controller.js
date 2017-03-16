@@ -1,4 +1,4 @@
-angular.module("app").controller('menuController', ["$scope", "$rootScope", "$location", "categoryService", function ($scope, $rootScope, $location, categoryService) {
+angular.module("app").controller('menuController', ["$scope", "$rootScope", "$location", "categoryService", "loginService", function ($scope, $rootScope, $location, categoryService, loginService) {
 
     $scope.categories = [];
 
@@ -19,16 +19,16 @@ angular.module("app").controller('menuController', ["$scope", "$rootScope", "$lo
         $location.path("/signup");
     };
 
-    /*
+
     $scope.logout = function () {
         loginService.logout();
     };
-    */
+
 
     $scope.search = function () {
         $location.path("/products/search/" + $scope.searchQuery);
     };
-    /*
+
     $scope.$watch(function () {
         return cartService.getCartTotalPrice();
     }, function (newValue, oldValue) {
@@ -51,7 +51,7 @@ angular.module("app").controller('menuController', ["$scope", "$rootScope", "$lo
     }, function (newValue, oldValue) {
         $scope.userFullName = newValue;
     })
-*   */
+
 
 
 
