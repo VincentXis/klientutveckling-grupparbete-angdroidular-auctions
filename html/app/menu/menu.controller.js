@@ -1,5 +1,5 @@
 angular.module("app").controller('menuController', ["$scope", "$rootScope", "$location", "categoryService", "loginService", function ($scope, $rootScope, $location, categoryService, loginService) {
-
+    $scope.admin = false;
     $scope.categories = [];
 
     categoryService.getCategories().then(function (response) {
@@ -33,10 +33,11 @@ angular.module("app").controller('menuController', ["$scope", "$rootScope", "$lo
         return loginService.isUserLoggedIn();
     }, function (newValue, oldValue) {
         if (newValue) {
-            var user = loginService.getLoggedInUser();
             $scope.loggedIn = true;
+            $scope.admin = loginService.isUserAdmin();
         } else {
             $scope.loggedIn = false;
+            $scope.admin = false;
         }
     });
 
