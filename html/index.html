@@ -1,19 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <title>Angdroidular Auctions</title>
+    <meta charset="UTF-8">
     <base href="/">
+    <title>Gunhilds klädbutik</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="style.css">
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-route/angular-route.min.js"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-  </head>
-  <body>
-    <h1>Yo</h1>
-  </body>
+
+    <script src="app/app.module.js"></script>
+    <script src="app/app.config.js"></script>
+
+    <script src="app/main/main.module.js"></script>
+    <script src="app/main/main.component.js"></script>
+    <script src="app/main/main.controller.js"></script>
+
+    <script src="app/category/category.module.js"></script>
+    <script src="app/category/category.service.js"></script>
+
+    <script src="app/category/category.module.js"></script>
+    <script src="app/category/category.service.js"></script>
+
+    <script src="app/menu/menu.module.js"></script>
+    <script src="app/menu/menu.component.js"></script>
+    <script src="app/menu/menu.controller.js"></script>
+
+</head>
+<body ng-app="app">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <menu-bar></menu-bar>
+        </div>
+    </div>
+    <div class="row" ng-view>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <footer-bar></footer-bar>
+        </div>
+    </div>
+</div>
+</body>
 </html>

@@ -1,0 +1,1 @@
+angular.module("app", ["ui.bootstrap", "ngRoute", "ngAnimate", "main", "menu", "category"]);

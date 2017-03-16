@@ -1,0 +1,35 @@
+<nav class="navbar navbar-default navbar-fixed-top" ng-controller="menuController">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">angdroidular Auctions</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/auctions">Auktioner</a></li>
+            <li uib-dropdown>
+                <a href id="simple-dropdown-cat" uib-dropdown-toggle role="button">Kategorier <span class="caret"></span></a>
+                <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown-cat">
+                    <li ng-repeat="category in categories"><a href="/auctions/category/{{ category.id }}">{{category.name}}</a></li>
+                </ul>
+            </li>
+            <li>
+                <form class="navbar-form navbar-left" name="searchForm" novalidate>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Sök produkt" ng-model="searchQuery" required>
+                    </div>
+                    <button ng-click="search()" type="submit" class="btn btn-default" ng-disabled="searchForm.$invalid">Sök</button>
+                </form>
+            </li>
+        </ul>
+        <!--
+        <span class="navbar-right" ng-show="loggedIn">
+            <p class="navbar-text">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <a href="/customer" ng-bind="userFullName"></a>
+            </p>
+            <button type="button" class="btn btn-warning navbar-btn" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logga ut</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+        <span class="navbar-right" ng-show="!loggedIn">
+            <button type="button" class="btn btn-default navbar-btn" ng-click="signup()">Skapa konto</button> <button type="button" class="btn btn-primary navbar-btn" ng-click="login()"><span class="glyphicon glyphicon-log-in"></span> Logga in</button>
+        </span>-->
+    </div>
+</nav>
