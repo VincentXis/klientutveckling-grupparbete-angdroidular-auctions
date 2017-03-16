@@ -32,12 +32,7 @@ angular.module("app").controller('menuController', ["$scope", "$rootScope", "$lo
     $scope.$watch(function () {
         return loginService.isUserLoggedIn();
     }, function (newValue, oldValue) {
-        if (newValue) {
-            var user = loginService.getLoggedInUser();
-            $scope.loggedIn = true;
-        } else {
-            $scope.loggedIn = false;
-        }
+        $scope.loggedIn = !!newValue;
     });
 
     $scope.$watch(function () {
