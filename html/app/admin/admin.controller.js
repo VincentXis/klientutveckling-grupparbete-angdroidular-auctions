@@ -11,8 +11,11 @@ angular.module("admin").controller("adminController", ["$scope", "$location", "$
         angular.forEach($scope.completedAuctions, function (auction) {
             promises.push(supplierService.getSupplierById(auction.supplierId));
         });
-        $q.all(promises).then(function success(data) {
-            console.log(data);
+
+        $q.all(promises).then(function (response) {
+            for (var i = 0; i < $scope.completedAuctions.length; i++) {
+                $scope.completedAuctions[i].supplier = response[i].data;
+            }
         })
     });
 
