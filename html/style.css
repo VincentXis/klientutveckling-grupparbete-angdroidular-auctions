@@ -7,7 +7,7 @@ body {
 }
 
 .product {
-    display: inline;
+    display: block;
     list-style: none;
     width: 25%;
     float: left;
@@ -16,9 +16,10 @@ body {
 }
 
 .product img {
-    position: relative;
-    width:  125px;
-    height: 125px;
+    width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .product:hover img {
@@ -67,8 +68,9 @@ body {
         transform: rotate(359deg);
     }
 }
-
-.img-thumbnail {
-    width: 150px;
-    height: 150px;
+.auctiondetails{
+ padding: 15px;
+ 
 }
+
+  

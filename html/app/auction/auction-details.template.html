@@ -5,6 +5,50 @@
         </div>
         <div class="panel-body">
 
+            <table>
+                <tr>
+                    <td class="auctiondetails">
+                        <img ng-src="{{auction.imageUrl}}" class="img-rounded" alt="descirption" style="width:220px;">
+                    </td>
+                    <td>Beskrivning: {{auction.description}}<br>Buy now price: {{auction.buyNowPrice}}<br>Startar: {{auction.startTime}}<br>Slutar:
+                        {{auction.endTime}}
+                       
+
+                    </td>
+                    <td class="auctiondetails">
+                         <p> Aktuell bud: <span></span></p><input type="text" name="bud"> <br>
+                        <div style="margin: 5px">
+                          
+                            <button type="submit" class="btn btn-primary" value="Lägg bud">Lägg bud</button>
+                            <button type="submit" class="btn btn-primary" value="Köp nu">Köp nu</button>
+                        </div>
+                    </td>
+                    <td>
+                        <ul>
+                    </td>
+                </tr>
+            </table>
+
+            <!--<table>
+            <tr>
+                <th>
+                    <img ng-src="{{auction.imageUrl}}" class="img-rounded" alt="descirption" style="width:150px;">
+                </th>
+            </tr>
+            <tr>
+                <td>{{auction.description}}</td>
+            </tr>
+            <tr>
+                <td>{{auction.buyNowPrice}} SEK</td>
+            </tr>
+            <tr>
+                <td> {{auction.startTime}}</td>
+            </tr>
+            <tr>
+                <td> {{auction.endTime}}</td>
+            </tr>
+            </table>-->
+
         </div>
     </div>
 </div>
