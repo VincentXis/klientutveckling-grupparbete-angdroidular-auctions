@@ -19,3 +19,21 @@ angular.module("appfilter").filter("limitAuctions", function () {
         return filterAuctions;
     }
 });
+
+angular.module("appfilter").filter("completedAuctions", function () {
+   return function (auctions, completedAuctions) {
+       var filerAuctions = [];
+       angular.forEach(auctions, function (auction) {
+           var found = false;
+           angular.forEach(completedAuctions, function (compAuction) {
+               if (compAuction.id == auction.id)  {
+                   found = true;
+               }
+           });
+           if (!found) {
+               filerAuctions.push(auction);
+           }
+       });
+       return filerAuctions;
+   }
+});
