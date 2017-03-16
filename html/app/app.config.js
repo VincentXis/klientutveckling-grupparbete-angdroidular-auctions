@@ -24,6 +24,9 @@ angular.module("app").config(["$routeProvider", "$locationProvider", function ($
         .when("/auction/:id", {
             template: "<auction-details></auction-details>"
         })
+        .when("/admin", {
+            template: "<admin></admin>"
+        })
         .otherwise({template: "<main></main>"});
     $locationProvider.html5Mode(true);
 }]);
