@@ -2,6 +2,7 @@ angular.module("auction").controller("auctionListController", ["$scope", "$route
     var auctions = [];
     $scope.limitByCategory = "";
     $scope.limitBySearch = "";
+    $scope.auctionId = "";
 
     auctionService.getAuction().then(function (response) {
         auctions = response.data;
@@ -12,5 +13,9 @@ angular.module("auction").controller("auctionListController", ["$scope", "$route
         $scope.auctions = auctions;
     });
 
+    $scope.goToAuctionPage = function(id){
+        $scope.auctionId = id;
+        window.location = "/auction/" + $scope.auctionId;
+    }
 }]);
 
