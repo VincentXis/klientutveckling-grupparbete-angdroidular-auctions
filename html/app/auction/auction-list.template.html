@@ -4,9 +4,9 @@
             <h1 class="panel-title">Auktioner </h1>
         </div>
         <table class="table table-hover">
-            <tbody>
+            <tbody ng-repeat="auction in auctions | limitAuctions:limitByCategory:limitBySearch">
                <div class="panel-body">
-                    <tr class="hover" ng-repeat="auction in auctions | limitAuctions:limitByCategory:limitBySearch">
+                    <tr class="hover" ng-click="goToAuctionPage(auction.id)">
                         <td><a href="/auction/{{ auction.id }}"><img ng-src="{{ auction.imageUrl }}" class="img-thumbnail"></a></td>
                         <td><a href="/auction/{{ auction.id }}">{{ auction.name }}</a></td>
                     </tr>
