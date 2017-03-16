@@ -9,7 +9,9 @@
                     <th>ID</th>
                     <th>Namn</th>
                     <th>Slutade</th>
+                    <th>Leverantör</th>
                     <th>Slutpris</th>
+                    <th>Provision</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,7 +19,9 @@
                     <td>{{ auction.id }}</td>
                     <td>{{ auction.name }}</td>
                     <td>{{ auction.endTime | date:"yyyy-MM-dd HH:mm:ss" }}</td>
-                    <td>{{ auction.buyNowPrice }}</td>
+                    <td>{{ auction.supplier.companyName }}</td>
+                    <td>{{ auction.buyNowPrice }} kr</td>
+                    <td>{{ (auction.buyNowPrice * auction.supplier.commission) }} kr</td>
                 </tr>
             </tbody>
         </table>
