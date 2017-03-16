@@ -1,13 +1,17 @@
 <div class="col-md-12">
-
-    <table class="table table-hover">
-        </thead>
-        <tbody>
-        <tr class="hover" ng-click="" ng-repeat="auction in auctions | limitAuctions:limitByCategory:limitBySearch">
-            <td><a href="/auction/{{ auction.id }}"><img ng-src="{{ auction.imageUrl }}" class="img-thumbnail"></a></td>
-            <td><a href="/auction/{{ auction.id }}" style="text-align: left">{{ auction.name }}</a></td>
-        </tr>
-        </tbody>
-    </table>
-
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title">Auktioner </h1>
+        </div>
+        <table class="table table-hover">
+            <tbody ng-repeat="auction in auctions | limitAuctions:limitByCategory:limitBySearch">
+               <div class="panel-body">
+                    <tr class="hover" ng-click="goToAuctionPage(auction.id)">
+                        <td><a href="/auction/{{ auction.id }}"><img ng-src="{{ auction.imageUrl }}" class="img-thumbnail"></a></td>
+                        <td><a href="/auction/{{ auction.id }}">{{ auction.name }}</a></td>
+                    </tr>
+               </div>
+            </tbody>
+        </table>
+    </div>
 </div>

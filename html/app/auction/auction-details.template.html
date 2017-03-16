@@ -10,21 +10,23 @@
                     <td class="auctiondetails">
                         <img ng-src="{{auction.imageUrl}}" class="img-rounded" alt="descirption" style="width:220px;">
                     </td>
-                    <td>Beskrivning: {{auction.description}}<br>Buy now price: {{auction.buyNowPrice}}<br>Startar: {{auction.startTime}}<br>Slutar:
+                    <td class="auctiondetails">Beskrivning: {{auction.description}}<br>Buy now price: {{auction.buyNowPrice}}<br>Startar: {{auction.startTime}}<br>Slutar:
                         {{auction.endTime}}
-                       
-
+                        <br>
+                        <div style="margin: 10px"><a class="btn btn-primary" ng-click="showSupplier()">Visa leverantör</a></div>
                     </td>
                     <td class="auctiondetails">
-                         <p> Aktuell bud: <span></span></p><input type="text" name="bud"> <br>
+                        <p> Aktuell bud: <span>{{auction.bidPrice}}</span></p><input type="text" name="bud"> <br>
                         <div style="margin: 5px">
-                          
                             <button type="submit" class="btn btn-primary" value="Lägg bud">Lägg bud</button>
                             <button type="submit" class="btn btn-primary" value="Köp nu">Köp nu</button>
                         </div>
                     </td>
-                    <td>
-                        <ul>
+                    <td class="auctiondetails">
+                        <p>Budhistorik:</p>
+                        <ul style="list-style-type:none">
+                            <li ng-repeat="bid in bids">{{bid.bidPrice}}</li>
+                        </ul>
                     </td>
                 </tr>
             </table>
