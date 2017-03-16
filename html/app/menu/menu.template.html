@@ -19,12 +19,15 @@
                     <button ng-click="search()" type="submit" class="btn btn-default" ng-disabled="searchForm.$invalid">Sök</button>
                 </form>
             </li>
+            <li ng-if="admin">
+                <a href="/admin">Administration</a>
+            </li>
         </ul>
 
         <span class="navbar-right" ng-show="loggedIn">
             <p class="navbar-text">
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                <a href="/customer" ng-bind="userFullName"></a>
+                {{ userFullName }}
             </p>
             <button type="button" class="btn btn-warning navbar-btn" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logga ut</button>&nbsp;&nbsp;&nbsp;&nbsp;
         </span>
