@@ -6,6 +6,27 @@ body {
     padding-top: 70px;
 }
 
+.product {
+    display: block;
+    list-style: none;
+    width: 25%;
+    float: left;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.product img {
+    width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product:hover img {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
 .gly-spin {
     -webkit-animation: spin 2s infinite linear;
     -moz-animation: spin 2s infinite linear;

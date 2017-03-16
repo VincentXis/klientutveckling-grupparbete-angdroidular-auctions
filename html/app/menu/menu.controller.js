@@ -26,14 +26,8 @@ angular.module("app").controller('menuController', ["$scope", "$rootScope", "$lo
 
 
     $scope.search = function () {
-        $location.path("/products/search/" + $scope.searchQuery);
+        $location.path("/auctions/search/" + $scope.searchQuery);
     };
-
-    $scope.$watch(function () {
-        return cartService.getCartTotalPrice();
-    }, function (newValue, oldValue) {
-        $scope.cartTotalPrice = newValue;
-    });
 
     $scope.$watch(function () {
         return loginService.isUserLoggedIn();

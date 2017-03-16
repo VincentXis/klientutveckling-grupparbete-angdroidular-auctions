@@ -12,6 +12,15 @@ angular.module("app").config(["$routeProvider", "$locationProvider", function ($
         .when("/signup", {
             template: "<signup></signup>"
         })
+        .when("/auctions", {
+            template: "<auction-list></auction-list>"
+        })
+        .when("/auctions/category/:category", {
+            template: "<auction-list></auction-list>"
+        })
+        .when("/auctions/search/:search", {
+            template: "<auction-list></auction-list>"
+        })
         .otherwise({template: "<main></main>"});
     $locationProvider.html5Mode(true);
 }]);

@@ -1,0 +1,19 @@
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ product.name }} </h3>
+        </div>
+        <div class="panel-body">
+            <div class="det-left"><img ng-src="{{ product.imageUrl }}"></div>
+            <div class="det-right">{{ product.description }}</div>
+            <div class="det-right"><h1>{{ product.price }} kr</h1><br></div>
+            <div class="det-right" ng-hide=" product.unitsInStock == 0">
+                Antal:
+                <a href="#" ng-click="remove()"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>
+                {{ quantity }}
+                <a href="#" ng-click="add()"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a><br><br>
+                <a ng-click="addToCart(product, quantity)" type="button" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Lägg i kundvagn</a>
+            </div>
+        </div>
+    </div>
+</div>
