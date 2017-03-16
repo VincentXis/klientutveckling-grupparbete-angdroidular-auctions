@@ -24,6 +24,9 @@ angular.module("app").config(["$routeProvider", "$locationProvider", function ($
         .when("/auction/:id", {
             template: "<auction-details></auction-details>"
         })
+        .when("/supplier/:id", {
+            template: "<supplier-details></supplier-details>"
+        })
         .when("/admin", {
             template: "<admin></admin>"
         })
