@@ -7,7 +7,7 @@ body {
 }
 
 .product {
-    display: block;
+    display: inline;
     list-style: none;
     width: 25%;
     float: left;
@@ -16,10 +16,9 @@ body {
 }
 
 .product img {
-    width: 70%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    position: relative;
+    width:  125px;
+    height: 125px;
 }
 
 .product:hover img {
@@ -67,4 +66,9 @@ body {
         -webkit-transform: rotate(359deg);
         transform: rotate(359deg);
     }
+}
+
+.img-thumbnail {
+    width: 150px;
+    height: 150px;
 }
