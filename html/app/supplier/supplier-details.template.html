@@ -4,29 +4,42 @@
             <h3 class="panel-title">Leverantör information</h3>
         </div>
         <div class="panel-body">
-            <table class="table">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 panel panel-default">
+            <table class="table ">
                 <tr class="row table-head">
-                    <td class="col-md-2"></td>
-                    <th class="col-md-2">namn:</th>
-                    <td class="col-md-8">{{supplier.companyName}}</td>
+                    <td class="col-md-3"></td>
+                    <th class="col-md-2">Namn:</th>
+                    <td class="col-md-6">{{supplier.companyName}}</td>
                 </tr>
                 <tr class="row table-row">
                     <td class="col-md-2"></td>
-                    <th class="col-md-2">namn:</th>
+                    <th class="col-md-2">E-post:</th>
                     <td class="col-md-8">{{supplier.email}}</td>
                 </tr>
                 <tr class="row table-row">
                     <td class="col-md-2"></td>
-                    <th class="col-md-2">namn:</th>
-                    <td class="col-md-8">{{supplier.companyName}}</td>
+                    <th class="col-md-2">Telefon:</th>
+                    <td class="col-md-8">{{supplier.phone}}</td>
                 </tr>
                 <tr class="row table-row">
                     <td class="col-md-2"></td>
-                    <th class="col-md-2">namn:</th>
-                    <td class="col-md-8">{{supplier.companyName}}</td>
+                    <th class="col-md-2">Adress:</th>
+                    <td class="col-md-8">{{supplier.address}}</td>
                 </tr>
-
+                <tr class="row table-row">
+                    <td class="col-md-2"></td>
+                    <th class="col-md-2">Postnr:</th>
+                    <td class="col-md-8">{{supplier.postalCode}}</td>
+                </tr>
+                <tr class="row table-row">
+                    <td class="col-md-2"></td>
+                    <th class="col-md-2">Postort:</th>
+                    <td class="col-md-8">{{supplier.city}}</td>
+                </tr>
             </table>
+        </div>
+            <div class="col-md-2"></div>
         </div>
     </div>
 </div>
