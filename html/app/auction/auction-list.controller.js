@@ -1,4 +1,4 @@
-angular.module("auction").controller("auctionListController", ["$scope", "$routeParams", "auctionService", function ($scope, $routeParams, auctionService) {
+angular.module("auction").controller("auctionListController", ["$scope", "$routeParams", "$location", "auctionService", function ($scope, $routeParams, $location, auctionService) {
     var auctions = [];
     $scope.limitByCategory = "";
     $scope.limitBySearch = "";
@@ -10,12 +10,16 @@ angular.module("auction").controller("auctionListController", ["$scope", "$route
         $scope.limitByCategory = $routeParams.category;
         $scope.limitBySearch= $routeParams.search;
 
-        $scope.auctions = auctions;
+        auctionService.getCompletedAuctions().then(function (response) {
+            $scope.compAuctions = response.data;
+            $scope.auctions = auctions;
+        });
+
+
     });
 
     $scope.goToAuctionPage = function(id){
-        $scope.auctionId = id;
-        window.location = "/auction/" + $scope.auctionId;
+        $location.path("/auction/" + id);
     }
 }]);
 
