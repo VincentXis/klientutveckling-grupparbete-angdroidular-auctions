@@ -21,7 +21,7 @@ angular.module("app").config(["$routeProvider", "$locationProvider", function ($
         .when("/auctions/search/:search", {
             template: "<auction-list></auction-list>"
         })
-        .when("/product/:id", {
+        .when("/auction/:id", {
             template: "<auction-details></auction-details>"
         })
         .otherwise({template: "<main></main>"});
