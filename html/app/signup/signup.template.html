@@ -1,0 +1,42 @@
+<div class="col-md-6 col-md-offset-3">
+    <form name="customerForm" novalidate>
+        <div class="form-group" ng-class="{'has-error': customerForm.firstName.$invalid && customerForm.firstName.$touched, 'has-success': customerForm.firstName.$valid }">
+            <label for="firstName">Förnamn <span class="label label-danger" ng-if="customerForm.firstName.$invalid && customerForm.firstName.$touched">Du måste fylla i ett förnamn</span></label>
+            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Förnamn" ng-model="customer.firstName" required>
+        </div>
+        <div class="form-group" ng-class="{'has-error': customerForm.lastName.$invalid && customerForm.lastName.$touched, 'has-success': customerForm.lastName.$valid }">
+            <label for="lastName">Efternamn <span class="label label-danger" ng-if="customerForm.lastName.$invalid && customerForm.lastName.$touched">Du måste fylla i ett efternamn</span></label>
+            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Efternamn" ng-model="customer.lastName" required>
+        </div>
+        <div class="form-group"  ng-class="{'has-error': customerForm.email.$invalid && customerForm.email.$touched, 'has-success': customerForm.email.$valid }">
+            <label for="email">E-post <span class="label label-danger" ng-if="customerForm.email.$invalid && customerForm.email.$touched">Du måste fylla i en giltig e-post adress</span></label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="E-post" ng-model="customer.email" required>
+        </div>
+        <div class="form-group" ng-class="{'has-error': customerForm.phone.$invalid && customerForm.phone.$touched, 'has-success': customerForm.phone.$valid }">
+            <label for="phone">Telefon <span class="label label-danger" ng-if="customerForm.phone.$invalid && customerForm.phone.$touched">Du måste fylla i ett telefonnummer</span></label>
+            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Telefonnummer" ng-model="customer.phone" required>
+        </div>
+        <div class="form-group" ng-class="{'has-error': customerForm.address.$invalid && customerForm.address.$touched, 'has-success': customerForm.address.$valid }">
+            <label for="address">Adress <span class="label label-danger" ng-if="customerForm.address.$invalid && customerForm.address.$touched">Du måste fylla i en adress</span></label>
+            <input type="text" class="form-control" id="address" name="address" placeholder="Adress" ng-model="customer.address" required>
+        </div>
+        <div class="form-group" ng-class="{'has-error': customerForm.postalCode.$invalid && customerForm.postalCode.$touched, 'has-success': customerForm.postalCode.$valid }">
+            <label for="postalCode">Postnr <span class="label label-danger" ng-if="customerForm.postalCode.$invalid && customerForm.postalCode.$touched">Du måste fylla i ett postnr</span></label>
+            <input type="text" class="form-control" id="postalCode" name="postalCode" placeholder="Postnr" ng-model="customer.postalCode" required>
+        </div>
+        <div class="form-group" ng-class="{'has-error': customerForm.city.$invalid && customerForm.city.$touched, 'has-success': customerForm.city.$valid }">
+            <label for="city">Postort <span class="label label-danger" ng-if="customerForm.city.$invalid && customerForm.city.$touched">Du måste fylla i en postort</span></label>
+            <input type="text" class="form-control" id="city" name="city" placeholder="Postort" ng-model="customer.city" required>
+        </div>
+        <div class="form-group" ng-class="{'has-error': customerForm.password.$invalid && customerForm.password.$touched, 'has-warning': customer.password != customer.password2 && customerForm.password.$touched, 'has-success': customerForm.password.$valid }">
+            <label for="password">Lösenord <span class="label label-danger" ng-if="customerForm.password.$invalid && customerForm.password.$touched">Du måste fylla i ett lösenord</span></label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Lösenord" ng-model="customer.password" required>
+        </div>
+        <div class="form-group" ng-class="{'has-error': customerForm.password2.$invalid && customerForm.password2.$touched, 'has-warning': customer.password != customer.password2 && customerForm.password2.$touched, 'has-success': customerForm.password2.$valid }">
+            <label for="password2">Repetera lösenord <span class="label label-warning" ng-if="customer.password != customer.password2 && customerForm.password2.$touched">Lösenorden matchar inte</span></label>
+            <input type="password" class="form-control" id="password2" name="password2" placeholder="Repetera lösenord" ng-model="customer.password2" required>
+        </div>
+        <div class="alert alert-danger" role="alert" ng-hide="hideFailMessage">Fel vid registrering</div>
+        <button ng-disabled="customerForm.$invalid || customer.password != customer.password2 || !hideWaitMessage" type="submit" class="btn btn-primary" ng-click="signup()"><i class="glyphicon glyphicon-refresh" ng-hide="hideWaitMessage" ng-class="!hideWaitMessage ? 'gly-spin' : ''"></i> Registrera</button> <a href="/" class="btn btn-default">Avbryt</a>
+    </form>
+</div>

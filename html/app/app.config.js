@@ -9,6 +9,9 @@ angular.module("app").config(["$routeProvider", "$locationProvider", function ($
         .when("/login/:msg", {
             template: "<login></login>"
         })
+        .when("/signup", {
+            template: "<signup></signup>"
+        })
         .otherwise({template: "<main></main>"});
     $locationProvider.html5Mode(true);
 }]);
