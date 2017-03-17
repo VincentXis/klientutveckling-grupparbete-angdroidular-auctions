@@ -21,7 +21,7 @@
                         <p> Aktuell bud: <span>{{auction.bidPrice}} kr</span>
                         </p><input type="text" name="bud" ng-model="newPrice"> <br>
                         <div style="margin: 5px">
-                            <button type="submit" class="btn btn-primary" ng-click="bid(newPrice)" value="Lägg bud">Lägg bud</button>
+                            <button type="submit" class="btn btn-primary" ng-click="bid(newPrice)" ng-disabled="validateBid()" value="Lägg bud">Lägg bud</button>
                             <button type="submit" class="btn btn-primary" ng-click="bid(auction.buyNowPrice)" value="Köp nu">Köp nu: {{auction.buyNowPrice}} kr</button>
                         </div>
                     </td>

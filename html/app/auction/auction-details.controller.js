@@ -34,7 +34,14 @@ angular.module("auction").controller("auctionDetailsController", ["$scope", "$ro
 
             )
         }
+    }
 
+    $scope.validateBid = function(){
+        if($scope.newPrice > $scope.auction.bidPrice){
+            return false;
+        }else{
+            return true;
+        }
     }
 
 }]);
