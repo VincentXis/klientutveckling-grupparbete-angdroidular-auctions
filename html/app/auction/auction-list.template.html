@@ -6,9 +6,14 @@
         <table class="table table-hover">
             <tbody ng-repeat="auction in auctions | limitAuctions:limitByCategory:limitBySearch | completedAuctions:compAuctions">
                     <tr class="hover" ng-click="goToAuctionPage(auction.id)">
-                        <td><img ng-src="{{ auction.imageUrl }}" class="img-thumbnail"></td>
-                        <td><h3>{{ auction.name }}</h3></td>
+                        <td class="col-md-4"><img ng-src="{{ auction.imageUrl }}" class="img-thumbnail"></td>
+                        <td class="col-md-8">
+                            <h3>{{ auction.name }}</h3>
 
+                            <h4>{{auction.description}}</h4>
+                            <br>
+                            <h4>Utköpspris: {{auction.buyNowPrice}} kr</h4>
+                        </td>
                     </tr>
             </tbody>
         </table>
