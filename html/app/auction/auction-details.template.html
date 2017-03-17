@@ -19,10 +19,11 @@
                         </div>
                     </td>
                     <td class="auctiondetails">
-                        <p> Aktuell bud: <span>{{auction.bidPrice}}</span></p><input type="text" name="bud"> <br>
+                        <p> Aktuell bud: <span>{{auction.bidPrice}}</span>
+                        </p><input type="text" name="bud" ng-model="newPrice"> <br>
                         <div style="margin: 5px">
-                            <button type="submit" class="btn btn-primary" value="Lägg bud">Lägg bud</button>
-                            <button type="submit" class="btn btn-primary" value="Köp nu">Köp nu</button>
+                            <button type="submit" class="btn btn-primary" ng-click="bid(newPrice)" value="Lägg bud">Lägg bud</button>
+                            <button type="submit" class="btn btn-primary" ng-click="bid(auction.buyNowPrice)" value="Köp nu">Köp nu</button>
                         </div>
                     </td>
                     <td class="auctiondetails">
