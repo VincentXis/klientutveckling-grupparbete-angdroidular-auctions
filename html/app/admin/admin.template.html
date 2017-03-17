@@ -27,4 +27,26 @@
         </table>
     </div>
 
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Provisionsintäkter per månad</h3>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Månad</th>
+                <th>Omsättning</th>
+                <th>Provision</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="month in perMonth">
+                <td>{{ month.endMonth }}</td>
+                <td>{{ month.turnOver }} kr</td>
+                <td>{{ month.sales }} kr</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>
