@@ -7,8 +7,8 @@
             <tbody ng-repeat="auction in auctions | limitAuctions:limitByCategory:limitBySearch | completedAuctions:compAuctions">
                <div class="panel-body">
                     <tr class="hover" ng-click="goToAuctionPage(auction.id)">
-                        <td><a href="/auction/{{ auction.id }}"><img ng-src="{{ auction.imageUrl }}" class="img-thumbnail"></a></td>
-                        <td><a href="/auction/{{ auction.id }}">{{ auction.name }}</a></td>
+                        <td><img ng-src="{{ auction.imageUrl }}" class="img-thumbnail"></td>
+                        <td><h3>{{ auction.name }}</h3></td>
                     </tr>
                </div>
             </tbody>
