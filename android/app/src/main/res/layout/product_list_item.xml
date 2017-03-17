@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/productImageView"
+        android:id="@+id/auctionImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:srcCompat="@drawable/skjorta"
@@ -16,24 +16,36 @@
         android:layout_marginTop="8dp" />
 
     <TextView
-        android:id="@+id/productNameTextView"
+        android:id="@+id/auctionNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:text="En fin skjorta i blått"
+        android:text=""
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@+id/productImageView"
-        app:layout_constraintTop_toTopOf="@+id/productImageView" />
+        app:layout_constraintLeft_toRightOf="@+id/auctionImageView"
+        app:layout_constraintTop_toTopOf="@+id/auctionImageView" />
 
     <TextView
-        android:id="@+id/productPriceTextView"
+        android:id="@+id/buyNowPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:text="799 kr"
-        app:layout_constraintLeft_toRightOf="@+id/productImageView"
-        app:layout_constraintTop_toBottomOf="@+id/productNameTextView" />
+        android:text=""
+        app:layout_constraintLeft_toRightOf="@+id/auctionImageView"
+        app:layout_constraintTop_toBottomOf="@+id/auctionNameTextView" />
+
+    <TextView
+        android:id="@+id/highestBidTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/buyNowPrice"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/buyNowPrice"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="@+id/buyNowPrice" />
 </android.support.constraint.ConstraintLayout>

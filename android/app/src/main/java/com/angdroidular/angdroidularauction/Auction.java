@@ -7,16 +7,35 @@ import java.io.Serializable;
  */
 
 public class Auction implements Serializable {
+
+    private String id;
     private String name;
     private double price;
     private String imageUrl;
     private String supplierId;
+    private String categoryId;
+    private String endTime;
+    private String startTime;
 
-    public Auction(String name, double price, String imageUrl, String supplierId) {
+
+    public Auction(String id, String name, double price, String imageUrl, String supplierId, String categotyId, String endTime, String startTime) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
         this.supplierId = supplierId;
+        this.categoryId = categotyId;
+        this.endTime = endTime;
+        this.startTime = startTime;
+
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -50,4 +69,29 @@ public class Auction implements Serializable {
     public void setSupplierId(String supplierId) {
         this.supplierId = supplierId;
     }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
 }

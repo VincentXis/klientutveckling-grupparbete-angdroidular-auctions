@@ -22,12 +22,12 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class ProductListAdapter extends ArrayAdapter<Auction> {
-    private ArrayList<Auction> products;
+    private ArrayList<Auction> auctions;
 
     public ProductListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<Auction> objects) {
         super(context, resource, objects);
 
-        products = objects;
+        auctions = objects;
     }
 
     @NonNull
@@ -38,19 +38,20 @@ public class ProductListAdapter extends ArrayAdapter<Auction> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.product_list_item, parent, false);
         }
 
-        Auction product = products.get(position);
-        TextView productName = (TextView) convertView.findViewById(R.id.productNameTextView);
-        TextView productPrice = (TextView) convertView.findViewById(R.id.productPriceTextView);
-        ImageView productImage = (ImageView) convertView.findViewById(R.id.productImageView);
+        Auction product = auctions.get(position);
+        TextView auctionName = (TextView) convertView.findViewById(R.id.auctionNameTextView);
+        TextView buyNowPrice = (TextView) convertView.findViewById(R.id.buyNowPrice);
+        TextView highestBidTextView = (TextView) convertView.findViewById(R.id.highestBidTextView);
+        ImageView auctionImage = (ImageView) convertView.findViewById(R.id.auctionImageView);
 
-        productName.setText(product.getName());
+        auctionName.setText(product.getName());
 
         Locale swedish = new Locale("sv", "SE");
         NumberFormat priceFormat = NumberFormat.getCurrencyInstance(swedish);
         String price = priceFormat.format(product.getPrice());
-        productPrice.setText(price);
+        buyNowPrice.setText(price);
 
-        Picasso.with(getContext()).load(product.getImageUrl()).into(productImage);
+        Picasso.with(getContext()).load(product.getImageUrl()).into(auctionImage);
 
         return convertView;
     }

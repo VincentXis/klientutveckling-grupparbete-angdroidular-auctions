@@ -24,11 +24,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String PRODUCT = "PRODUCT";
     private ArrayList<Auction> products = new ArrayList<>();
+    private ArrayList<Bid> bids = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +48,16 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         try {
                             for (int i = 0; i < response.length(); i++) {
+
                                 JSONObject product = (JSONObject) response.get(i);
-                                products.add(new Auction(product.getString("name"),
+                                products.add(new Auction(product.getString("id"),
+                                        product.getString("name"),
                                         product.getDouble("buyNowPrice"),
                                         product.getString("imageUrl"),
-                                        product.getString("supplierId")));
+                                        product.getString("supplierId"),
+                                        product.getString("categoryId"),
+                                        product.getString("endTime"),
+                                        product.getString("startTime")));
                             }
                             setupProductList();
 
@@ -63,9 +71,45 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        JsonArrayRequest request2 =null;
+        for (int i = 0; i < products.size(); i++) {
+            request2 = new JsonArrayRequest("http://nackademiska-api.azurewebsites.net/api/bid/" + products.get(i).getId().toString(),
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            try {
+                                for (int i = 0; i < response.length(); i++) {
+                                    JSONObject bid = (JSONObject) response.get(i);
+                                    bids.add(new Bid(bid.getString("id"),
+                                            bid.getString("auctionId"),
+                                            bid.getString("customerId"),
+                                            bid.getString("dateTime"),
+                                            bid.getDouble("bidPrice")));
+                                }
+                                Collections.sort(bids, new Comparator<Bid>() {
+                                    @Override
+                                    public int compare(Bid bid1, Bid bid2) {
+                                        return Double.compare(bid1.getBidPrice(),bid2.getBidPrice());
+                                    }
+                                });
+                                setupProductList();
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+        }
 
 
         requestQueue.add(request);
+        requestQueue.add(request2);
 
 
     }

@@ -89,7 +89,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
 
-        //textView.setText(auction.getName()+"\n" + supplierDetails.getCompanyName()+"\n"+ supplierDetails.getPhone()+"\n"+supplierDetails.getAddress());
+        textView.setText(auction.getName()+"\n" + supplierDetails.getCompanyName()+"\n"+ supplierDetails.getPhone()+"\n"+supplierDetails.getAddress());
     }
 
 
