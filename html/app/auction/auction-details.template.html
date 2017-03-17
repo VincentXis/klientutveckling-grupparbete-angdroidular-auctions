@@ -24,6 +24,7 @@
                             <button type="submit" class="btn btn-primary" ng-click="bid(newPrice)" ng-disabled="validateBid()" value="Lägg bud">Lägg bud</button>
                             <button type="submit" class="btn btn-primary" ng-click="bid(auction.buyNowPrice)" value="Köp nu">Köp nu: {{auction.buyNowPrice}} kr</button>
                         </div>
+                        <div class="alert alert-danger" role="alert" ng-show="showError">Ogiltigt bud</div>
                     </td>
                     <td class="auctiondetails">
                         <p>Budhistorik:</p>
