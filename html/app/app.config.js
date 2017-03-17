@@ -30,6 +30,9 @@ angular.module("app").config(["$routeProvider", "$locationProvider", function ($
         .when("/admin", {
             template: "<admin></admin>"
         })
+        .when("/thankyou", {
+            templateUrl: "app/bid/bid.template.html"
+        })
         .otherwise({template: "<main></main>"});
     $locationProvider.html5Mode(true);
 }]);
