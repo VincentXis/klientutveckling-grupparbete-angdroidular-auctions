@@ -4,10 +4,14 @@ angular.module("auction").controller("auctionDetailsController", ["$scope", "$ro
     auctionService.getAuctionById($routeParams.id).then(function (response) {
         $scope.auction = response.data;
         bidService.getBids($routeParams.id).then(function(bidResponse){
+
             $scope.bids = bidResponse.data;
 
+            if (bidResponse.data.length > 0) {
                 $scope.auction.bidPrice = bidResponse.data[bidResponse.data.length - 1].bidPrice;
-
+            } else {
+                $scope.auction.bidPrice = 0;
+            }
 
         })
     });
