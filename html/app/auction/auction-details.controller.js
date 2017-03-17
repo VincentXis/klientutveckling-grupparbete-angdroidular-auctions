@@ -8,7 +8,7 @@ angular.module("auction").controller("auctionDetailsController", ["$scope", "$ro
             $scope.auction.bidPrice = bidResponse.data[bidResponse.data.length - 1].bidPrice;
         })
     });
-    showSupplier = function(){
+    $scope.showSupplier = function(){
         $location.path("/supplier/"+ $scope.auction.supplierId )
     }
 
