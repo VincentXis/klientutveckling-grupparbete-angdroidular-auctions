@@ -18,10 +18,10 @@
                 <tr ng-repeat="auction in completedAuctions">
                     <td>{{ auction.id }}</td>
                     <td>{{ auction.name }}</td>
-                    <td>{{ auction.endTime | date:"yyyy-MM-dd HH:mm:ss" }}</td>
+                    <td>{{ auction.winningDate| date:"yyyy-MM-dd HH:mm:ss" }}</td>
                     <td>{{ auction.supplier.companyName }}</td>
-                    <td>{{ auction.buyNowPrice }} kr</td>
-                    <td>{{ (auction.buyNowPrice * auction.supplier.commission) }} kr</td>
+                    <td>{{ auction.winningBid }} kr</td>
+                    <td>{{ (auction.winningBid * auction.supplier.commission) }} kr</td>
                 </tr>
             </tbody>
         </table>
@@ -45,6 +45,14 @@
                 <td>{{ month.turnOver }} kr</td>
                 <td>{{ month.sales }} kr</td>
             </tr>
+            <thead>
+            <tr>
+                <th>Totalt</th>
+                <th>{{ totalTurnOver }} kr</th>
+                <th>{{ totalSales }} kr</th>
+
+            </tr>
+            </thead>
             </tbody>
         </table>
     </div>

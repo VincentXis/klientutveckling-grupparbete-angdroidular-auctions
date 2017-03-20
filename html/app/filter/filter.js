@@ -37,3 +37,20 @@ angular.module("appfilter").filter("completedAuctions", function () {
        return filerAuctions;
    }
 });
+
+angular.module("appfilter").filter("auctionsDatesValid", ["$filter", function ($filter) {
+    return function (auctions) {
+        var filterAuctions = [];
+        angular.forEach(auctions, function (auction) {
+            var startDate = new Date($filter('date')(auction.startTime));
+            var endDate = new Date($filter('date')(auction.endTime));
+            var today = new Date();
+
+            if (startDate <= today && endDate >= today) {
+                filterAuctions.push(auction);
+            }
+        });
+
+        return filterAuctions;
+    }
+}]);

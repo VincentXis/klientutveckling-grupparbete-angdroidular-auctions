@@ -1,6 +1,8 @@
-angular.module("admin").controller("adminController", ["$scope", "$location", "$q", "$filter", "loginService", "auctionService", "supplierService", function ($scope, $location, $q, $filter, loginService, auctionService, supplierService) {
+angular.module("admin").controller("adminController", ["$scope", "$location", "$q", "$filter", "loginService", "auctionService", "supplierService", "bidService", function ($scope, $location, $q, $filter, loginService, auctionService, supplierService, bidService) {
     $scope.completedAuctions = [];
     $scope.perMonth = [];
+    $scope.totalSales = 0;
+    $scope.totalTurnOver = 0;
 
     if(!loginService.isUserAdmin() || !loginService.isUserLoggedIn()) {
         $location.path("/");
@@ -8,47 +10,44 @@ angular.module("admin").controller("adminController", ["$scope", "$location", "$
 
     auctionService.getCompletedAuctions().then(function (response) {
         $scope.completedAuctions = response.data;
-        var promises = [];
-        angular.forEach($scope.completedAuctions, function (auction) {
-            promises.push(supplierService.getSupplierById(auction.supplierId));
-        });
 
-        $q.all(promises).then(function (response) {
-            for (var i = 0; i < $scope.completedAuctions.length; i++) {
-                $scope.completedAuctions[i].supplier = response[i].data;
-            }
-            var totalSales = 0;
-            var totalTurnOver = 0;
-            angular.forEach($scope.completedAuctions, function (auction) {
-                var endMonth = $filter('date')(auction.endTime, "MMMM y");
-                var added = false;
-                angular.forEach($scope.perMonth, function (month) {
-                    if (month.endMonth == endMonth) {
-                        added = true;
-                        month.sales += (auction.buyNowPrice * auction.supplier.commission);
-                        month.turnOver += auction.buyNowPrice;
-                        totalSales += (auction.buyNowPrice * auction.supplier.commission);
-                        totalTurnOver += auction.buyNowPrice;
-                    }
-                });
-                if (!added) {
-                    $scope.perMonth.push({
-                        endMonth: endMonth,
-                        turnOver: auction.buyNowPrice,
-                        sales: (auction.buyNowPrice * auction.supplier.commission)
+
+        angular.forEach(response.data, function (auction) {
+            supplierService.getSupplierById(auction.supplierId).then(function (supplier) {
+                auction.supplier = supplier.data;
+
+                bidService.getBids(auction.id).then(function (bids) {
+                    auction.winningBid = bids.data[bids.data.length-1].bidPrice;
+                    auction.winningDate = bids.data[bids.data.length-1].dateTime;
+
+                    var endMonth = $filter('date')(auction.winningDate, "MMMM y");
+                    var added = false;
+
+                    angular.forEach($scope.perMonth, function (month) {
+                        if (month.endMonth == endMonth) {
+                            added = true;
+                            month.sales += (auction.winningBid * auction.supplier.commission);
+                            month.turnOver += auction.winningBid;
+                            $scope.totalSales += (auction.winningBid * auction.supplier.commission);
+                            $scope.totalTurnOver += auction.winningBid;
+                        }
                     });
-                    totalSales += (auction.buyNowPrice * auction.supplier.commission);
-                    totalTurnOver += auction.buyNowPrice;
-                }
+
+                    if (!added) {
+                        $scope.perMonth.push({
+                            endMonth: endMonth,
+                            turnOver: auction.winningBid,
+                            sales: (auction.winningBid * auction.supplier.commission)
+                        });
+                        $scope.totalSales += (auction.winningBid * auction.supplier.commission);
+                        $scope.totalTurnOver += auction.winningBid;
+                    }
+
+
             });
 
-            $scope.perMonth.push({
-                endMonth: "Total",
-                turnOver: totalTurnOver,
-                sales: totalSales
+
             });
-
-
         });
 
 
@@ -56,3 +55,6 @@ angular.module("admin").controller("adminController", ["$scope", "$location", "$
 
 
 }]);
+
+
+
