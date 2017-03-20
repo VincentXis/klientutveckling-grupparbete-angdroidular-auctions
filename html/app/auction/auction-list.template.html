@@ -4,7 +4,7 @@
             <h1 class="panel-title">Auktioner </h1>
         </div>
         <table class="table table-hover">
-            <tbody ng-repeat="auction in auctions | limitAuctions:limitByCategory:limitBySearch | completedAuctions:compAuctions">
+            <tbody ng-repeat="auction in auctions | limitAuctions:limitByCategory:limitBySearch | completedAuctions:compAuctions | auctionsDatesValid">
                     <tr class="hover" ng-click="goToAuctionPage(auction.id)">
                         <td class="col-md-4"><img ng-src="{{ auction.imageUrl }}" class="img-thumbnail"></td>
                         <td class="col-md-8">
