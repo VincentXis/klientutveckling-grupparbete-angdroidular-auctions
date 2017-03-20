@@ -4,57 +4,86 @@
             <h3 class="panel-title">{{ auction.name }} </h3>
         </div>
         <div class="panel-body">
-
-            <table>
-                <tr>
-                    <td class="auctiondetails">
-                        <img ng-src="{{auction.imageUrl}}" class="img-rounded" alt="descirption" style="width:220px;">
-                    </td>
-                    <td class="auctiondetails">Beskrivning: {{auction.description}}<br>
-                        Startar: {{ auction.startTime | date:"yyyy-MM-dd HH:mm" }}<br>
-                        Slutar: {{auction.endTime | date:"yyyy-MM-dd HH:mm" }} <br>
-                        <div style="margin: 10px">
+            <div class="col-md-8">
+                <div class="col-md-12 panel-body" style="padding-top:0;">
+                    <img ng-src="{{auction.imageUrl}}" class="img-rounded" alt="descirption"
+                         style="width: 100%;height: auto;">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">
+                            <h4 class="panel-title">Beskrivning</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p style="word-wrap: break-word">{{auction.description}}</p>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <th>Startar:</th>
+                                    <td>{{ auction.startTime | date:"yyyy-MM-dd HH:mm" }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Slutar:</th>
+                                    <td>{{auction.endTime | date:"yyyy-MM-dd HH:mm" }}</td>
+                                </tr>
+                            </table>
                             <a class="btn btn-primary" ng-click="showSupplier()">Visa leverantör</a>
                         </div>
-                    </td>
-                    <td class="auctiondetails">
-                        <p> Aktuell bud: <span>{{auction.bidPrice}} kr</span>
-                        </p><input type="text" name="bud" ng-model="newPrice"> <br>
-                        <div style="margin: 5px">
-                            <button type="submit" class="btn btn-primary" ng-click="bid(newPrice)" ng-disabled="validateBid()" value="Lägg bud">Lägg bud</button>
-                            <button type="submit" class="btn btn-primary" ng-click="bid(auction.buyNowPrice)" value="Köp nu">Köp nu: {{auction.buyNowPrice}} kr</button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <label for="bud">
+                                <h4>Aktuell bud: <span>{{auction.bidPrice}} kr</span></h4>
+                            </label>
+
+                            <input class="form-control" type="text" id="bud" ng-model="newPrice"
+                                   placeholder="{{auction.bidPrice + 1}} kr">
+
+                            <div style="margin-top: 5px">
+                                <button type="submit" class="btn btn-primary" ng-click="bid(newPrice)"
+                                        ng-disabled="validateBid()" value="Lägg bud">Lägg bud
+                                </button>
+                                <button type="submit" class="btn btn-primary" ng-click="bid(auction.buyNowPrice)"
+                                        value="Köp nu">Köp nu: {{auction.buyNowPrice}} kr
+                                </button>
+                            </div>
                         </div>
-                        <div class="alert alert-danger" role="alert" ng-show="showError">Ogiltigt bud</div>
-                    </td>
-                    <td class="auctiondetails">
-                        <p>Budhistorik:</p>
-                        <ul style="list-style-type:none">
-                            <li ng-repeat="bid in bids | orderBy:'-bidPrice'">{{ bid.bidPrice }} kr ({{ bid.dateTime | date:'yyyy-MM-dd HH:mm' }})</li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
 
-            <!--<table>
-            <tr>
-                <th>
-                    <img ng-src="{{auction.imageUrl}}" class="img-rounded" alt="descirption" style="width:150px;">
-                </th>
-            </tr>
-            <tr>
-                <td>{{auction.description}}</td>
-            </tr>
-            <tr>
-                <td>{{auction.buyNowPrice}} SEK</td>
-            </tr>
-            <tr>
-                <td> {{auction.startTime}}</td>
-            </tr>
-            <tr>
-                <td> {{auction.endTime}}</td>
-            </tr>
-            </table>-->
+                        <div class="alert alert-danger" style="margin-left: 5px; margin-right: 5px"
+                             role="alert" ng-show="showError">Ogiltigt bud
+                        </div>
+                    </div>
 
+                </div>
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">
+                            <h4 class="panel-title">Budhistorik:</h4>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td><h4 style="margin: 0">Belopp</h4></td>
+                                        <td><h4 style="margin: 0">Datum</h4></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="bid in bids | orderBy:'-bidPrice'">
+                                        <td>{{ bid.bidPrice }} kr</td>
+                                        <td>{{ bid.dateTime |date:'yyyy-MM-dd HH:mm' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
