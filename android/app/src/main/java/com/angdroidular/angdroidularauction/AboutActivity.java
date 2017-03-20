@@ -23,19 +23,7 @@ public class AboutActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TextView aboutText = (TextView) findViewById(R.id.aboutTextView);
 
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT, aboutText.getText());
-                intent.setType("text/plain");
-                startActivity(intent);
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

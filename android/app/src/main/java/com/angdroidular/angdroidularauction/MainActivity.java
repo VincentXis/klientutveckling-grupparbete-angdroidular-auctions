@@ -2,8 +2,6 @@ package com.angdroidular.angdroidularauction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -24,13 +22,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String PRODUCT = "PRODUCT";
-    private ArrayList<Auction> products = new ArrayList<>();
+    private static final String ID = "ID" ;
+    private ArrayList<Auction> auctions = new ArrayList<>();
     private ArrayList<Bid> bids = new ArrayList<>();
 
     @Override
@@ -49,16 +46,22 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             for (int i = 0; i < response.length(); i++) {
 
-                                JSONObject product = (JSONObject) response.get(i);
-                                products.add(new Auction(product.getString("id"),
-                                        product.getString("name"),
-                                        product.getDouble("buyNowPrice"),
-                                        product.getString("imageUrl"),
-                                        product.getString("supplierId"),
-                                        product.getString("categoryId"),
-                                        product.getString("endTime"),
-                                        product.getString("startTime")));
+                                JSONObject auction = (JSONObject) response.get(i);
+                                auctions.add(new Auction(auction.getString("id"),
+                                        auction.getString("name"),
+                                        auction.getDouble("buyNowPrice"),
+                                        auction.getString("imageUrl"),
+                                        auction.getString("supplierId"),
+                                        auction.getString("categoryId"),
+                                        auction.getString("endTime"),
+                                        auction.getString("startTime")));
+
+                                //getBid(response,auction.getString("id"));
                             }
+                            for (int i = 0; i < bids.size(); i++) {
+
+                            }
+
                             setupProductList();
 
                         } catch (JSONException e) {
@@ -71,51 +74,51 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        JsonArrayRequest request2 =null;
-        for (int i = 0; i < products.size(); i++) {
-            request2 = new JsonArrayRequest("http://nackademiska-api.azurewebsites.net/api/bid/" + products.get(i).getId().toString(),
-                    new Response.Listener<JSONArray>() {
-                        @Override
-                        public void onResponse(JSONArray response) {
-                            try {
-                                for (int i = 0; i < response.length(); i++) {
-                                    JSONObject bid = (JSONObject) response.get(i);
-                                    bids.add(new Bid(bid.getString("id"),
-                                            bid.getString("auctionId"),
-                                            bid.getString("customerId"),
-                                            bid.getString("dateTime"),
-                                            bid.getDouble("bidPrice")));
-                                }
-                                Collections.sort(bids, new Comparator<Bid>() {
-                                    @Override
-                                    public int compare(Bid bid1, Bid bid2) {
-                                        return Double.compare(bid1.getBidPrice(),bid2.getBidPrice());
-                                    }
-                                });
-                                setupProductList();
 
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
 
-                }
-            });
-        }
 
 
         requestQueue.add(request);
-        requestQueue.add(request2);
 
 
     }
 
+    /*public void getBid(JSONArray response, final String ID){
+        JsonArrayRequest request2 = new JsonArrayRequest("http://nackademiska-api.azurewebsites.net/api/bid/" + ID,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject bid = (JSONObject) response.get(i);
+                                bids.add(new Bid(bid.getString("id"),
+                                        bid.getString("auctionId"),
+                                        bid.getString("customerId"),
+                                        bid.getString("dateTime"),
+                                        bid.getDouble("bidPrice")));
+                            }
+                            *//*Collections.sort(bids, new Comparator<Bid>() {
+                                @Override
+                                public int compare(Bid bid1, Bid bid2) {
+                                    return Double.compare(bid1.getBidPrice(), bid2.getBidPrice());
+                                }
+                            });*//*
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        ArrayList<JsonArrayRequest> requestQueue = null;
+        requestQueue.add(request2);
+    }*/
     private void setupProductList() {
-        ProductListAdapter productAdapter = new ProductListAdapter(this, R.layout.product_list_item, products);
+        ProductListAdapter productAdapter = new ProductListAdapter(this, R.layout.product_list_item, auctions);
 
         ListView productListView = (ListView) findViewById(R.id.productListView);
 
@@ -126,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                intent.putExtra(PRODUCT, products.get(position));
+                intent.putExtra(PRODUCT, auctions.get(position));
                 startActivity(intent);
             }
         });

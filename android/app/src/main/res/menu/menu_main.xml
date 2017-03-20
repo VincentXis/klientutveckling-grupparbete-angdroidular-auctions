@@ -4,13 +4,14 @@
     tools:context="com.angdroidular.angdroidularauction.MainActivity">
     <item
         android:id="@+id/action_settings"
+        android:icon="@android:color/black"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_about"
+        android:icon="@android:color/black"
         android:orderInCategory="90"
         android:title="@string/action_about"
-        android:icon="@drawable/ic_action_about"
         app:showAsAction="always" />
 </menu>

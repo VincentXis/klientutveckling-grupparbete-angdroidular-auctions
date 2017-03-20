@@ -33,6 +33,7 @@ import java.util.ArrayList;
 public class DetailActivity extends AppCompatActivity {
 
     private Supplier supplierDetails;
+    String supp = "";
     //private ArrayList<Supplier> supplierDetails = new ArrayList<>();
 
     @Override
@@ -43,23 +44,17 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         Intent intent = getIntent();
-        Auction auction = (Auction) intent.getSerializableExtra(MainActivity.PRODUCT);
+        final Auction auction = (Auction) intent.getSerializableExtra(MainActivity.PRODUCT);
 
 
 
-        final JsonObjectRequest request = new JsonObjectRequest("http://nackademiska-api.azurewebsites.net/api/supplier/0b9dbb4d-4815-4f1a-a24f-e2bd167ef8cd" ,
+
+        final JsonObjectRequest request = new JsonObjectRequest("http://nackademiska-api.azurewebsites.net/api/supplier/" + auction.getSupplierId(),
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -68,10 +63,16 @@ public class DetailActivity extends AppCompatActivity {
 
                             JSONObject supplier = (JSONObject) response;
                             supplierDetails = new Supplier(supplier.getString("companyName"),
-                                    supplier.getString("phone"),
-                                    supplier.getString("address"));
+                                                            supplier.getString("phone"),
+                                                            supplier.getString("address"));
+
+                            TextView textView = (TextView) findViewById(R.id.textView);
 
 
+                            String s = "Namn: " + auction.getName() + "\n" + "Start tid: " + auction.getStartTime() + "\n" +
+                                    "Slut tid: " + auction.getEndTime() + "\n" + "Acceptans pris: " + auction.getPrice() + "\n" + "Levarantör: " + supplierDetails.getCompanyName();
+
+                            textView.setText(s);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -85,16 +86,25 @@ public class DetailActivity extends AppCompatActivity {
         });
         requestQueue.add(request);
 
-        TextView textView = (TextView) findViewById(R.id.textView);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                TextView textView = (TextView) findViewById(R.id.textView);
 
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, textView.getText());
+                intent.putExtra(Intent.EXTRA_SUBJECT,"Kolla in den här auktionen!");
+                intent.setType("text/plain");
+                startActivity(intent);
 
-        textView.setText(auction.getName()+"\n" + supplierDetails.getCompanyName()+"\n"+ supplierDetails.getPhone()+"\n"+supplierDetails.getAddress());
+            }
+        });
+
     }
 
 
-    public void clickMe(View view) {
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(supplierDetails.toString());
-    }
+
 }

@@ -7,6 +7,7 @@ package com.angdroidular.angdroidularauction;
 import java.io.Serializable;
 
 public class Supplier implements Serializable {
+
     private String companyName;
     private String phone;
     private String address;
