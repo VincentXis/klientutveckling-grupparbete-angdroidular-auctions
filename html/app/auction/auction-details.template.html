@@ -6,8 +6,8 @@
         <div class="panel-body">
             <div class="col-md-8">
                 <div class="col-md-12 panel-body" style="padding-top:0;">
-                <img ng-src="{{auction.imageUrl}}" class="img-rounded" alt="descirption"
-                     style="width: 100%;height: auto;">
+                    <img ng-src="{{auction.imageUrl}}" class="img-rounded" alt="descirption"
+                         style="width: 100%;height: auto;">
                 </div>
             </div>
             <div class="col-md-4">
@@ -17,13 +17,7 @@
                             <h4 class="panel-title">Beskrivning</h4>
                         </div>
                         <div class="panel-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <td>{{auction.description}}</td>
-                                    </tr>
-                                </thead>
-                            </table>
+                            <p style="word-wrap: break-word">{{auction.description}}</p>
                         </div>
                         <div class="panel-body">
                             <table class="table">
@@ -48,7 +42,7 @@
                             </label>
 
                             <input class="form-control" type="text" id="bud" ng-model="newPrice"
-                            placeholder="{{auction.bidPrice + 1}} kr">
+                                   placeholder="{{auction.bidPrice + 1}} kr">
 
                             <div style="margin-top: 5px">
                                 <button type="submit" class="btn btn-primary" ng-click="bid(newPrice)"
@@ -61,7 +55,8 @@
                         </div>
 
                         <div class="alert alert-danger" style="margin-left: 5px; margin-right: 5px"
-                             role="alert" ng-show="showError">Ogiltigt bud</div>
+                             role="alert" ng-show="showError">Ogiltigt bud
+                        </div>
                     </div>
 
                 </div>
