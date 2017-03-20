@@ -5,8 +5,10 @@
         </div>
         <div class="panel-body">
             <div class="col-md-8">
+                <div class="col-md-12 panel-body" style="padding-top:0;">
                 <img ng-src="{{auction.imageUrl}}" class="img-rounded" alt="descirption"
                      style="width: 100%;height: auto;">
+                </div>
             </div>
             <div class="col-md-4">
                 <div class="col-md-12">
@@ -18,9 +20,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <td>
-                                            {{auction.description}}
-                                        </td>
+                                        <td>{{auction.description}}</td>
                                     </tr>
                                 </thead>
                             </table>
