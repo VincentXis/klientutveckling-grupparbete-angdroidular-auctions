@@ -19,17 +19,23 @@
                     </td>
                     <td class="auctiondetails">
                         <p> Aktuell bud: <span>{{auction.bidPrice}} kr</span>
-                        </p><input type="text" name="bud" ng-model="newPrice"> <br>
+                        </p><input class="form-control" type="text" name="bud" ng-model="newPrice"> <br>
                         <div style="margin: 5px">
-                            <button type="submit" class="btn btn-primary" ng-click="bid(newPrice)" ng-disabled="validateBid()" value="Lägg bud">Lägg bud</button>
-                            <button type="submit" class="btn btn-primary" ng-click="bid(auction.buyNowPrice)" value="Köp nu">Köp nu: {{auction.buyNowPrice}} kr</button>
+                            <button type="submit" class="btn btn-primary" ng-click="bid(newPrice)"
+                                    ng-disabled="validateBid()" value="Lägg bud">Lägg bud
+                            </button>
+                            <button type="submit" class="btn btn-primary" ng-click="bid(auction.buyNowPrice)"
+                                    value="Köp nu">Köp nu: {{auction.buyNowPrice}} kr
+                            </button>
                         </div>
                         <div class="alert alert-danger" role="alert" ng-show="showError">Ogiltigt bud</div>
                     </td>
                     <td class="auctiondetails">
-                        <p>Budhistorik:</p>
                         <ul style="list-style-type:none">
-                            <li ng-repeat="bid in bids | orderBy:'-bidPrice'">{{ bid.bidPrice }} kr ({{ bid.dateTime | date:'yyyy-MM-dd HH:mm' }})</li>
+                            <p>Budhistorik:</p>
+                            <li ng-repeat="bid in bids | orderBy:'-bidPrice'">{{ bid.bidPrice }} kr ({{ bid.dateTime |
+                                date:'yyyy-MM-dd HH:mm' }})
+                            </li>
                         </ul>
                     </td>
                 </tr>
