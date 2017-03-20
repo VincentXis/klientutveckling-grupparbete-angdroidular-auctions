@@ -1,0 +1,62 @@
+ auctionService.getCompletedAuctions().then(function (response) {
+        $scope.completedAuctions = response.data;
+        var promises = [];
+        angular.forEach($scope.completedAuctions, function (auction) {
+            promises.push(supplierService.getSupplierById(auction.supplierId));
+        });
+
+        $q.all(promises).then(function (response) {
+            for (var i = 0; i < $scope.completedAuctions.length; i++) {
+                $scope.completedAuctions[i].supplier = response[i].data;
+            }
+            var totalSales = 0;
+            var totalTurnOver = 0;
+            var aucitonPromise = [];
+            angular.forEach($scope.completedAuctions, function (auction) {
+                auctionPromise.push(bidService.getBids(auction.id));
+
+
+                /*
+                var endMonth = $filter('date')(auction.endTime, "MMMM y");
+                var added = false;
+                angular.forEach($scope.perMonth, function (month) {
+                    if (month.endMonth == endMonth) {
+                        added = true;
+                        month.sales += (auction.buyNowPrice * auction.supplier.commission);
+                        month.turnOver += auction.buyNowPrice;
+                        totalSales += (auction.buyNowPrice * auction.supplier.commission);
+                        totalTurnOver += auction.buyNowPrice;
+                    }
+                });
+                if (!added) {
+                    $scope.perMonth.push({
+                        endMonth: endMonth,
+                        turnOver: auction.buyNowPrice,
+                        sales: (auction.buyNowPrice * auction.supplier.commission)
+                    });
+                    totalSales += (auction.buyNowPrice * auction.supplier.commission);
+                    totalTurnOver += auction.buyNowPrice;
+                }
+                */
+            });
+
+            $q.all(aucitonPromise).then(function (response) {
+                for (var i = 0; i < $scope.completedAuctions.length; i++) {
+                    $scope.completedAuctions[i].bids = response[i].data;
+                    console.log(response);
+                }
+            });
+
+
+            /*
+            $scope.perMonth.push({
+                endMonth: "Total",
+                turnOver: totalTurnOver,
+                sales: totalSales
+            });
+            */
+
+        });
+
+
+    });
