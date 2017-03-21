@@ -180,10 +180,6 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         switch (id) {
-            case R.id.action_settings:
-                Toast toast = Toast.makeText(MainActivity.this, "Du klickade settings", Toast.LENGTH_SHORT);
-                toast.show();
-                return true;
             case R.id.action_about:
                 Intent intent = new Intent(MainActivity.this, AboutActivity.class);
                 startActivity(intent);
