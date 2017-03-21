@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:text=""
+        android:text="auction name"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/auctionImageView"
@@ -31,21 +31,19 @@
         android:id="@+id/buyNowPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:text=""
-        app:layout_constraintLeft_toRightOf="@+id/auctionImageView"
-        app:layout_constraintTop_toBottomOf="@+id/auctionNameTextView" />
+        android:text="buy now price"
+        app:layout_constraintTop_toBottomOf="@+id/auctionNameTextView"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/auctionNameTextView" />
 
     <TextView
         android:id="@+id/highestBidTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="6dp"
+        android:text="highest bid"
         app:layout_constraintLeft_toLeftOf="@+id/buyNowPrice"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/buyNowPrice"
-        android:layout_marginRight="0dp"
-        app:layout_constraintRight_toRightOf="@+id/buyNowPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/buyNowPrice" />
 </android.support.constraint.ConstraintLayout>

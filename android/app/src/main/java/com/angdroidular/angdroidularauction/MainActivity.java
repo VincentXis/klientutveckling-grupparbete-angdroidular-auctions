@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String ID = "ID" ;
     private ArrayList<Auction> auctions = new ArrayList<>();
     private ArrayList<Bid> bids = new ArrayList<>();
+    private RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue = Volley.newRequestQueue(this);
 
         JsonArrayRequest request = new JsonArrayRequest("http://nackademiska-api.azurewebsites.net/api/auction",
                 new Response.Listener<JSONArray>() {
@@ -55,11 +56,10 @@ public class MainActivity extends AppCompatActivity {
                                         auction.getString("categoryId"),
                                         auction.getString("endTime"),
                                         auction.getString("startTime")));
-
-                                //getBid(response,auction.getString("id"));
                             }
-                            for (int i = 0; i < bids.size(); i++) {
 
+                            for(Auction auction: auctions) {
+                                fetchBids(auction);
                             }
 
                             setupProductList();
@@ -77,10 +77,39 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
         requestQueue.add(request);
 
+
+    }
+
+    private void fetchBids(final Auction auction) {
+        JsonArrayRequest request = new JsonArrayRequest("http://nackademiska-api.azurewebsites.net/api/bid/" + auction.getId(),
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject bid = (JSONObject) response.get(i);
+                                auction.addBid(new Bid(bid.getString("id"),
+                                        bid.getString("auctionId"),
+                                        bid.getString("customerId"),
+                                        bid.getString("dateTime"),
+                                        bid.getDouble("bidPrice")
+                                ));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+        });
+
+        requestQueue.add(request);
 
     }
 

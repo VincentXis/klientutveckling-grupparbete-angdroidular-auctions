@@ -1,6 +1,8 @@
 package com.angdroidular.angdroidularauction;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Rand on 2017-03-17.
@@ -16,6 +18,7 @@ public class Auction implements Serializable {
     private String categoryId;
     private String endTime;
     private String startTime;
+    private List<Bid> bids;
 
 
     public Auction(String id, String name, double price, String imageUrl, String supplierId, String categotyId, String endTime, String startTime) {
@@ -27,7 +30,7 @@ public class Auction implements Serializable {
         this.categoryId = categotyId;
         this.endTime = endTime;
         this.startTime = startTime;
-
+        bids = new ArrayList<>();
     }
 
     public String getId() {
@@ -94,4 +97,15 @@ public class Auction implements Serializable {
         this.startTime = startTime;
     }
 
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
+
+    public void addBid(Bid bid) {
+        this.bids.add(bid);
+    }
+
+    public double getHighestBid() {
+        return bids.size() > 0 ? bids.get(bids.size()-1).getBidPrice() : 0;
+    }
 }
