@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_detail">
 
     <ImageView
-        android:id="@+id/auctionImageView"
+        android:id="@+id/auctionImageDetailView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:srcCompat="@drawable/skjorta"

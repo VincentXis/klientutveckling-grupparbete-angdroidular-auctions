@@ -5,6 +5,7 @@ package com.angdroidular.angdroidularauction;
  */
 
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,7 +16,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.content.Context;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,14 +48,13 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-
+        ImageView auctionImage = (ImageView) findViewById(R.id.auctionImageDetailView);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         Intent intent = getIntent();
         final Auction auction = (Auction) intent.getSerializableExtra(MainActivity.PRODUCT);
 
-
+        Picasso.with(getApplicationContext()).load(auction.getImageUrl()).into(auctionImage);
 
 
         final JsonObjectRequest request = new JsonObjectRequest("http://nackademiska-api.azurewebsites.net/api/supplier/" + auction.getSupplierId(),
