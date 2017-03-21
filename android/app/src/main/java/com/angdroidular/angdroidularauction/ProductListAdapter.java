@@ -38,20 +38,25 @@ public class ProductListAdapter extends ArrayAdapter<Auction> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.product_list_item, parent, false);
         }
 
-        Auction product = auctions.get(position);
+        Auction auction = auctions.get(position);
         TextView auctionName = (TextView) convertView.findViewById(R.id.auctionNameTextView);
         TextView buyNowPrice = (TextView) convertView.findViewById(R.id.buyNowPrice);
         TextView highestBidTextView = (TextView) convertView.findViewById(R.id.highestBidTextView);
         ImageView auctionImage = (ImageView) convertView.findViewById(R.id.auctionImageView);
 
-        auctionName.setText(product.getName());
+        auctionName.setText(auction.getName());
+
+
 
         Locale swedish = new Locale("sv", "SE");
         NumberFormat priceFormat = NumberFormat.getCurrencyInstance(swedish);
-        String price = priceFormat.format(product.getPrice());
-        buyNowPrice.setText(price);
+        String price = priceFormat.format(auction.getPrice());
+        buyNowPrice.setText("Köp nu: " + price);
 
-        Picasso.with(getContext()).load(product.getImageUrl()).into(auctionImage);
+        price = priceFormat.format(auction.getHighestBid());
+        highestBidTextView.setText("Högst bud: " + price);
+
+        Picasso.with(getContext()).load(auction.getImageUrl()).into(auctionImage);
 
         return convertView;
     }

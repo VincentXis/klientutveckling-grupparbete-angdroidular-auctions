@@ -1,10 +1,12 @@
 package com.angdroidular.angdroidularauction;
 
+import java.io.Serializable;
+
 /**
  * Created by Rand on 2017-03-17.
  */
 
-public class Bid {
+public class Bid implements Serializable {
     private String id;
     private String auctionId;
     private String customerId;
