@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +22,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Auction> auctions = new ArrayList<>();
     private ArrayList<Bid> bids = new ArrayList<>();
     private RequestQueue requestQueue;
+    private ListView productListView;
+    private ProductListAdapter productAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         requestQueue = Volley.newRequestQueue(this);
+        productListView = (ListView) findViewById(R.id.productListView);
+        productAdapter = new ProductListAdapter(this, R.layout.product_list_item, auctions);
 
         JsonArrayRequest request = new JsonArrayRequest("http://nackademiska-api.azurewebsites.net/api/auction",
                 new Response.Listener<JSONArray>() {
@@ -48,14 +57,18 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < response.length(); i++) {
 
                                 JSONObject auction = (JSONObject) response.get(i);
-                                auctions.add(new Auction(auction.getString("id"),
-                                        auction.getString("name"),
-                                        auction.getDouble("buyNowPrice"),
-                                        auction.getString("imageUrl"),
-                                        auction.getString("supplierId"),
-                                        auction.getString("categoryId"),
-                                        auction.getString("endTime"),
-                                        auction.getString("startTime")));
+
+                                if (checkDates(auction.getString("startTime"),auction.getString("endTime")))
+                                {
+                                    auctions.add(new Auction(auction.getString("id"),
+                                            auction.getString("name"),
+                                            auction.getDouble("buyNowPrice"),
+                                            auction.getString("imageUrl"),
+                                            auction.getString("supplierId"),
+                                            auction.getString("categoryId"),
+                                            auction.getString("endTime"),
+                                            auction.getString("startTime")));
+                                }
                             }
 
                             for(Auction auction: auctions) {
@@ -82,6 +95,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private boolean checkDates(String startTime, String endTime) {
+        try {
+
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+            Date startDate = sdf.parse(startTime);
+            Date endDate = sdf.parse(endTime);
+            Date today = new Date();
+
+
+
+            if (startDate.after(today)) return false;
+            if (endDate.before(today)) return false;
+
+        } catch (ParseException e) {
+            Log.d("MyError", e.getMessage());
+            e.printStackTrace();
+        }
+        return true;
+    }
+
     private void fetchBids(final Auction auction) {
         JsonArrayRequest request = new JsonArrayRequest("http://nackademiska-api.azurewebsites.net/api/bid/" + auction.getId(),
                 new Response.Listener<JSONArray>() {
@@ -90,13 +124,22 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject bid = (JSONObject) response.get(i);
+
+
+
                                 auction.addBid(new Bid(bid.getString("id"),
                                         bid.getString("auctionId"),
                                         bid.getString("customerId"),
                                         bid.getString("dateTime"),
                                         bid.getDouble("bidPrice")
                                 ));
+                                if (auction.getPrice() == auction.getHighestBid()) {
+                                    auctions.remove(auction);
+                                }
+
+                                productAdapter.notifyDataSetChanged();
                             }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -147,9 +190,9 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(request2);
     }*/
     private void setupProductList() {
-        ProductListAdapter productAdapter = new ProductListAdapter(this, R.layout.product_list_item, auctions);
 
-        ListView productListView = (ListView) findViewById(R.id.productListView);
+
+
 
         productListView.setAdapter(productAdapter);
 
