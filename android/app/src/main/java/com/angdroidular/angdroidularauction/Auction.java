@@ -1,7 +1,11 @@
 package com.angdroidular.angdroidularauction;
 
+
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +35,27 @@ public class Auction implements Serializable {
         this.endTime = endTime;
         this.startTime = startTime;
         bids = new ArrayList<>();
+    }
+
+    public boolean isAuctionValid() {
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date startDate = sdf.parse(startTime);
+            Date endDate = sdf.parse(endTime);
+            Date today = new Date();
+
+            if (startDate.after(today)) return false;
+            if (endDate.before(today)) return false;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (price == getHighestBid()) return false;
+
+
+        return true;
     }
 
     public String getId() {
